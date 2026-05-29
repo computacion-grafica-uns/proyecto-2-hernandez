@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CT_Procedural
-  m_Shader: {fileID: 4800000, guid: 869c2073be612154fbe6049b956d3d5d, type: 3}
+  m_Shader: {fileID: 4800000, guid: d9a8b59c84322b24aa2ed7c1e0b634a3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []

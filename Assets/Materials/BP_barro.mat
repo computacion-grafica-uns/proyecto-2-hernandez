@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BP_barro
-  m_Shader: {fileID: 4800000, guid: edc1556407f235a41825223ae2a2f441, type: 3}
+  m_Shader: {fileID: 4800000, guid: c378f66639d4422488334f9eb22afced, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -75,6 +75,7 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpotAngle: 0.8
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
@@ -87,4 +88,9 @@ Material:
     - _MaterialKa: {r: 0.15, g: 0.1, b: 0.08, a: 0}
     - _MaterialKd: {r: 0.65, g: 0.4, b: 0.22, a: 0}
     - _MaterialKs: {r: 0.05, g: 0.04, b: 0.03, a: 0}
+    - _PointLightIntensity: {r: 1, g: 1, b: 1, a: 1}
+    - _PointLightPosition_w: {r: 0, g: 3, b: 0, a: 1}
+    - _SpotLightDirection: {r: 0, g: -1, b: 0, a: 0}
+    - _SpotLightIntensity: {r: 1, g: 1, b: 1, a: 1}
+    - _SpotLightPosition_w: {r: 0, g: 3, b: 0, a: 1}
   m_BuildTextureStacks: []

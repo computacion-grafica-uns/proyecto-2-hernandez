@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: T_Vidrio
-  m_Shader: {fileID: 4800000, guid: 5b8760eb5d6ec5a4e82cbbb1254368a0, type: 3}
+  m_Shader: {fileID: 4800000, guid: c28d7d2ab99949c43ac0ab5926a22cb9, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
