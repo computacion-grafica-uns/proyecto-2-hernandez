@@ -88,7 +88,7 @@ Material:
     - _F0: {r: 0.955, g: 0.638, b: 0.538, a: 0}
     - _LightIntensity: {r: 1, g: 1, b: 1, a: 1}
     - _LightPosition_w: {r: 0, g: 5, b: 0, a: 1}
-    - _MaterialKa: {r: 0.33, g: 0.08, b: 0.21, a: 0}
+    - _MaterialKa: {r: 0.21, g: 0.12, b: 0.09, a: 0}
     - _MaterialKd: {r: 0, g: 0, b: 0, a: 0}
     - _MaterialKs: {r: 0, g: 0, b: 0, a: 0}
     - _PointLightIntensity: {r: 1, g: 1, b: 1, a: 1}

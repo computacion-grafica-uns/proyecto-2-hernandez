@@ -1,4 +1,5 @@
-Shader "Custom/CookTorrancea12"
+
+/*Shader "Custom/CookTorrancea12"
 
 {
     Properties
@@ -144,7 +145,207 @@ Shader "Custom/CookTorrancea12"
             ENDCG
         }
     }
+}*/
+
+Shader "Custom/CookTorrancea12"
+{
+    Properties
+    {
+        _LightIntensity  ("Light Intensity", Color) = (1, 1, 1, 1)
+        _LightPosition_w ("Light Position (World)", Vector) = (0, 5, 0, 1)
+
+        // POINT LIGHT
+        _PointLightIntensity ("Point Light Intensity", Color) = (1,1,1,1)
+        _PointLightPosition_w ("Point Light Position", Vector) = (0,3,0,1)
+
+        // SPOT LIGHT
+        _SpotLightIntensity ("Spot Light Intensity", Color) = (1,1,1,1)
+        _SpotLightPosition_w ("Spot Light Position", Vector) = (0,3,0,1)
+        _SpotLightDirection ("Spot Light Direction", Vector) = (0,-1,0,0)
+        _SpotAngle ("Spot Angle", Float) = 0.8
+
+        _AmbientLight ("Ambient Light", Color) = (1, 1, 1, 1)
+
+        _MaterialKa  ("Material Ka", Vector) = (0, 0, 0, 0)
+        _AlbedoColor ("Albedo Color", Vector) = (0.8, 0.6, 0.1, 0)
+
+        _F0        ("F0", Vector) = (0.955, 0.638, 0.538, 0)
+        _Roughness ("Roughness", Float) = 0.3
+    }
+
+    SubShader
+    {
+        Tags { "RenderType" = "Opaque" }
+
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vertexShader
+            #pragma fragment fragmentShader
+            #include "UnityCG.cginc"
+
+            float4 _LightIntensity;
+            float4 _LightPosition_w;
+
+            float4 _PointLightIntensity;
+            float4 _PointLightPosition_w;
+
+            float4 _SpotLightIntensity;
+            float4 _SpotLightPosition_w;
+            float4 _SpotLightDirection;
+            float  _SpotAngle;
+
+            float4 _AmbientLight;
+            float4 _MaterialKa;
+            float4 _AlbedoColor;
+            float4 _F0;
+            float  _Roughness;
+
+            struct v2f
+            {
+                float4 position   : SV_POSITION;
+                float4 position_w : TEXCOORD0;
+                float3 normal_w   : TEXCOORD1;
+            };
+
+            v2f vertexShader(appdata_base v)
+            {
+                v2f o;
+                o.position   = UnityObjectToClipPos(v.vertex);
+                o.position_w = mul(unity_ObjectToWorld, v.vertex);
+                o.normal_w   = UnityObjectToWorldNormal(v.normal);
+                return o;
+            }
+
+            // =========================
+            // FUNCIONES PBR
+            // =========================
+
+            float3 FresnelSchlick(float3 F0, float VdotH)
+            {
+                return F0 + (1.0 - F0) * pow(1.0 - VdotH, 5.0);
+            }
+
+            float DistributionGGX(float NdotH, float roughness)
+            {
+                float a = roughness * roughness;
+                float a2 = a * a;
+                float NdotH2 = NdotH * NdotH;
+                float denom = NdotH2 * (a2 - 1.0) + 1.0;
+                return a2 / (UNITY_PI * denom * denom);
+            }
+
+            float GeometrySchlickGGX(float NdotV, float roughness)
+            {
+                float a = roughness * roughness;
+                float k = a / 2.0;
+                return NdotV / (NdotV * (1.0 - k) + k);
+            }
+
+            float GeometrySmith(float NdotL, float NdotV, float roughness)
+            {
+                float gl = GeometrySchlickGGX(NdotL, roughness);
+                float gv = GeometrySchlickGGX(NdotV, roughness);
+                return gl * gv;
+            }
+
+            fixed4 fragmentShader(v2f f) : SV_Target
+            {
+                float3 N = normalize(f.normal_w);
+                float3 V = normalize(_WorldSpaceCameraPos - f.position_w.xyz);
+
+                float NdotV = max(0.0, dot(N, V));
+
+                float3 ambient = _AmbientLight.rgb * _MaterialKa.rgb;
+                float3 diffuseTerm = _AlbedoColor.rgb / UNITY_PI;
+
+                // =========================
+                // DIRECTIONAL LIGHT
+                // =========================
+                float3 L = normalize(_LightPosition_w.xyz - f.position_w.xyz);
+                float3 H = normalize(L + V);
+
+                float NdotL = max(0.0, dot(N, L));
+                float NdotH = max(0.0, dot(N, H));
+                float VdotH = max(0.0, dot(V, H));
+
+                float3 F = FresnelSchlick(_F0.rgb, VdotH);
+                float  D = DistributionGGX(NdotH, _Roughness);
+                float  G = GeometrySmith(NdotL, NdotV, _Roughness);
+
+                float3 specular = (F * D * G) / (4.0 * NdotL * NdotV + 0.001);
+
+                float3 dirLight =
+                    _LightIntensity.rgb *
+                    (diffuseTerm + specular) *
+                    NdotL;
+
+                // =========================
+                // POINT LIGHT
+                // =========================
+                float3 Lp = normalize(_PointLightPosition_w.xyz - f.position_w.xyz);
+                float3 Hp = normalize(Lp + V);
+
+                float NdotLp = max(0.0, dot(N, Lp));
+                float NdotHp = max(0.0, dot(N, Hp));
+                float VdotHp = max(0.0, dot(V, Hp));
+
+                float3 Fp = FresnelSchlick(_F0.rgb, VdotHp);
+                float  Dp = DistributionGGX(NdotHp, _Roughness);
+                float  Gp = GeometrySmith(NdotLp, NdotV, _Roughness);
+
+                float3 specularPoint = (Fp * Dp * Gp) / (4.0 * NdotLp * NdotV + 0.001);
+
+                float3 pointLight =
+                    _PointLightIntensity.rgb *
+                    (diffuseTerm + specularPoint) *
+                    NdotLp;
+
+                // =========================
+                // SPOT LIGHT
+                // =========================
+                float3 Ls = normalize(_SpotLightPosition_w.xyz - f.position_w.xyz);
+                float3 Hs = normalize(Ls + V);
+
+                float spotFactor =
+                    dot(normalize(-_SpotLightDirection.xyz), Ls);
+
+                spotFactor = step(_SpotAngle, spotFactor);
+
+                float NdotLs = max(0.0, dot(N, Ls));
+                float NdotHs = max(0.0, dot(N, Hs));
+                float VdotHs = max(0.0, dot(V, Hs));
+
+                float3 Fs = FresnelSchlick(_F0.rgb, VdotHs);
+                float  Ds = DistributionGGX(NdotHs, _Roughness);
+                float  Gs = GeometrySmith(NdotLs, NdotV, _Roughness);
+
+                float3 specularSpot = (Fs * Ds * Gs) / (4.0 * NdotLs * NdotV + 0.001);
+
+                float3 spotLight =
+                    _SpotLightIntensity.rgb *
+                    (diffuseTerm + specularSpot) *
+                    NdotLs *
+                    spotFactor;
+
+                // =========================
+                // FINAL COLOR
+                // =========================
+                float3 finalColor =
+                    ambient +
+                    dirLight +
+                    pointLight +
+                    spotLight;
+
+                return float4(finalColor, 1.0);
+            }
+
+            ENDCG
+        }
+    }
 }
+
+
 
 /*
 Shader "Custom/CookTorrancea12"

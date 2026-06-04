@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BP_Vidrio
-  m_Shader: {fileID: 4800000, guid: c378f66639d4422488334f9eb22afced, type: 3}
+  m_Shader: {fileID: 4800000, guid: 83d4297592a092340bd8f3278fe87215, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -65,6 +65,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _FresnelPower: 1.3
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -72,19 +73,30 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Opacity: 0
     - _Parallax: 0.02
+    - _Roughness: 0.05
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpotAngle: -3.27
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - _AlbedoColor: {r: 0.02, g: 0.02, b: 0.02, a: 0}
     - _AmbientLight: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _F0: {r: 0.61, g: 0.04, b: 0.04, a: 0}
+    - _GlassColor: {r: 0.8, g: 0.95, b: 1, a: 1}
     - _LightIntensity: {r: 1, g: 1, b: 1, a: 1}
-    - _LightPosition_w: {r: 0, g: 5, b: 0, a: 1}
+    - _LightPosition_w: {r: -1.04, g: 5, b: 0, a: 1}
     - _MaterialKa: {r: -3.12, g: 2.29, b: 1.45, a: 0}
     - _MaterialKd: {r: 0.1, g: 0.4, b: 0.8, a: 0}
-    - _MaterialKs: {r: 0.9, g: 0.9, b: 1, a: 0}
+    - _MaterialKs: {r: -1.7, g: 1.15, b: 1, a: 0}
+    - _PointLightIntensity: {r: 1, g: 1, b: 1, a: 1}
+    - _PointLightPosition_w: {r: 0, g: 3, b: 0, a: 1}
+    - _SpotLightDirection: {r: 0, g: -1, b: 0, a: 0}
+    - _SpotLightIntensity: {r: 1, g: 1, b: 1, a: 1}
+    - _SpotLightPosition_w: {r: 0, g: 3, b: 0, a: 1}
   m_BuildTextureStacks: []

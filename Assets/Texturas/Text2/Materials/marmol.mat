@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: T_Texture2D
-  m_Shader: {fileID: 4800000, guid: bdfa5e10290963f4fa6f92b652fb5c9e, type: 3}
-  m_Parent: {fileID: 2100000, guid: 3bc75d7939f610140bf15d2160288617, type: 2}
+  m_Name: marmol
+  m_Shader: {fileID: 4800000, guid: 68ae00da496f8194e8ec5c6494010eb5, type: 3}
+  m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -29,7 +29,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _SpecThresh: 1
+    - _Material_n: 64
     m_Colors:
-    - _LightPosition_w: {r: 0, g: 1000, b: 0, a: 1}
+    - _AmbientLight: {r: 1, g: 1, b: 1, a: 1}
+    - _LightIntensity: {r: 1, g: 1, b: 1, a: 1}
+    - _LightPosition_w: {r: 0, g: 5, b: 0, a: 1}
+    - _MaterialKa: {r: 0.1, g: 0.1, b: 0.1, a: 0}
+    - _MaterialKs: {r: 0.5, g: 0.5, b: 0.5, a: 0}
   m_BuildTextureStacks: []
