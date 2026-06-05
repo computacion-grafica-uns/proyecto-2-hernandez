@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: T_Procedural
-  m_Shader: {fileID: 4800000, guid: bdfa5e10290963f4fa6f92b652fb5c9e, type: 3}
+  m_Shader: {fileID: 4800000, guid: 82dd7dbfa820b37428fbe983268826b3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -69,6 +69,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Material_n: 32
     - _Metallic: 0
     - _Mode: 0
     - _NoiseAmp: 0.15
@@ -93,6 +94,9 @@ Material:
     - _LightIntensity: {r: 1, g: 1, b: 1, a: 1}
     - _LightPosition_w: {r: 0.05, g: 0, b: 30, a: 1}
     - _MaterialKa: {r: 0.1, g: 0.1, b: 0.1, a: 0}
+    - _MaterialKs: {r: 0.4, g: 0.4, b: 0.4, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _PointLightIntensity: {r: 1, g: 1, b: 1, a: 1}
+    - _PointLightPosition_w: {r: 0, g: 3, b: 0, a: 1}
     - _SpecColor2: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

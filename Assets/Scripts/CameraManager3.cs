@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 public class CameraManager3 : MonoBehaviour
 
 {
     [Header("Referencias")]
-    public TeapotGrid grid;
+    public TeapotGrid2 grid;
 
     [Header("Configuración Orbital")]
     public float sensibilidadRotacion = 3f;
@@ -20,7 +24,7 @@ public class CameraManager3 : MonoBehaviour
 
     // Scripts de cámara
     private CO camaraOrbital;
-    private CamaraFPS camaraFPS;
+    private CamaraFPSA camaraFPS;
 
     private bool modoFPS = false;
     private int indiceActual = -1;
@@ -51,11 +55,11 @@ public class CameraManager3 : MonoBehaviour
 
     void CrearCamaraFPS()
     {
-        GameObject go = new GameObject("CamaraFPS");
+        GameObject go = new GameObject("CamaraFPSA");
         go.transform.SetParent(this.transform);
 
         go.AddComponent<Camera>();
-        camaraFPS = go.AddComponent<CamaraFPS>();
+        camaraFPS = go.AddComponent<CamaraFPSA>();
 
         camaraFPS.velocidad      = velocidadFPS;
         camaraFPS.sensibilidad   = sensibilidadFPS;

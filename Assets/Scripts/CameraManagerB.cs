@@ -1,4 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
+
 
 /// <summary>
 /// Manager de camaras para la Escena B.
