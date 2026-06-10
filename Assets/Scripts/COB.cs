@@ -4,11 +4,11 @@ public class COB : MonoBehaviour
 {
     [Header("Objetivo y Posicionamiento")]
     public Vector3 objetivo;
-    public float distancia = 80f;
+    public float distancia = 20f;
 
     [Header("Limites de Zoom")]
     public float minDistancia = 2f;
-    public float maxDistancia = 500f;
+    public float maxDistancia = 300f;
 
     [Header("Sensibilidad")]
     public float sensibilidadRotacion = 3f;
@@ -41,9 +41,18 @@ public class COB : MonoBehaviour
         transform.LookAt(objetivo);
     }
 
+   // public void CambiarObjetivo(Vector3 nuevoObjetivo, float nuevaDistancia)
+    //{
+      //  objetivo  = nuevoObjetivo;
+       // distancia = nuevaDistancia;
+    //}
+
     public void CambiarObjetivo(Vector3 nuevoObjetivo, float nuevaDistancia)
-    {
-        objetivo  = nuevoObjetivo;
-        distancia = nuevaDistancia;
-    }
+{
+    objetivo = nuevoObjetivo;
+    distancia = nuevaDistancia;
+
+    // IMPORTANTE: evita que quede con ángulos raros del objetivo anterior
+    anguloX = transform.eulerAngles.y;
+}
 }
